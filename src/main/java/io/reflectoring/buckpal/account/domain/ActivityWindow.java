@@ -2,6 +2,7 @@ package io.reflectoring.buckpal.account.domain;
 
 import io.reflectoring.buckpal.account.domain.Account.AccountId;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,6 +11,14 @@ import lombok.NonNull;
 public class ActivityWindow {
 
   private List<Activity> activities;
+
+  public ActivityWindow(@NonNull List<Activity> activities) {
+    this.activities = activities;
+  }
+
+  public ActivityWindow(@NonNull Activity... activities) {
+    this.activities = new ArrayList<>(List.of(activities));
+  }
 
   public LocalDateTime getStartTimestamp() {
     return activities.stream()
@@ -24,7 +33,7 @@ public class ActivityWindow {
         .orElseThrow(IllegalStateException::new)
         .getTimestamp();
   }
-
+  
   public Money calculateBalance(AccountId accountId) {
     Money depositBalance = activities.stream()
         .filter(a -> a.getTargetAccountId().equals(accountId))
@@ -37,10 +46,6 @@ public class ActivityWindow {
         .reduce(Money.ZERO, Money::add);
 
     return Money.add(depositBalance, withdrawalBalance.negate());
-  }
-
-  public ActivityWindow(@NonNull List<Activity> activities) {
-    this.activities = activities;
   }
 
   public List<Activity> getActivities() {

@@ -7,10 +7,14 @@ import io.reflectoring.buckpal.account.application.port.out.LoadAccountPort;
 import io.reflectoring.buckpal.account.application.port.out.UpdateAccountStatePort;
 import io.reflectoring.buckpal.account.domain.Account;
 import io.reflectoring.buckpal.account.domain.Account.AccountId;
+import io.reflectoring.buckpal.common.UseCase;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
+@UseCase
+@Transactional
 public class SendMoneyService implements SendMoneyUseCase {
 
   private final LoadAccountPort loadAccountPort;

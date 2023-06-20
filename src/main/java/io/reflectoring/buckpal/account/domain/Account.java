@@ -1,6 +1,5 @@
 package io.reflectoring.buckpal.account.domain;
 
-import io.reflectoring.buckpal.account.domain.Activity.ActivityId;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AccessLevel;
@@ -42,7 +41,7 @@ public class Account {
     }
 
     Activity withdrawal =
-        new Activity(new ActivityId(activity.getId()), this.id, this.id, targetAccountId, LocalDateTime.now(), money);
+        new Activity(this.id, this.id, targetAccountId, LocalDateTime.now(), money);
     this.activityWindow.addActivity(withdrawal);
     return true;
   }
@@ -52,7 +51,7 @@ public class Account {
   }
 
   public boolean deposit(Money money, AccountId sourceAccountId) {
-    Activity deposit = new Activity(new ActivityId(activity.getId()), this.id, sourceAccountId, this.id, LocalDateTime.now(), money);
+    Activity deposit = new Activity(this.id, sourceAccountId, this.id, LocalDateTime.now(), money);
     this.activityWindow.addActivity(deposit);
     return true;
   }
