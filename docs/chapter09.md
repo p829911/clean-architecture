@@ -92,13 +92,13 @@ class Application {
 
 ## 스프링의 클래스패스 스캐닝으로 조립하기
 
-스프링 프레임워크를 이용해서 애플리케이션을 조립한 결과물: 애플리케이션 컨텍스트(application context)
+스프링 프레임워크를 이용해서 애플리케이션을 조립한 결과물: 애플리케이션 컨텍스트(application context)  
 애플리케이션 컨텍스트는 애플리케이션을 구성하는 모든 객체(bean)를 포함한다
 
-스프링은 클래스패스 스캐닝으로 클래스패스에서 접근 가능한 모든 클래스를 확인해서 `@Component` 애너테이션이 붙은 클래스를 찾고 각 클래스의 객체를 생성한다
+스프링은 클래스패스 스캐닝으로 클래스패스에서 접근 가능한 모든 클래스를 확인해서 `@Component` 애너테이션이 붙은 클래스를 찾고 각 클래스의 객체를 생성한다  
 이때 클래스는 필요한 모든 필드를 인자로 받는 생성자를 가지고 있어야 한다
 
-1. `@Component` 애너테이션이 붙은 클래스를 찾는다 (``AccountPersistenceAdapter`)
+1. `@Component` 애너테이션이 붙은 클래스를 찾는다 (`AccountPersistenceAdapter`)
 2. 클래스의 생성자 인자 중 `@Component` 가 붙은 클래스들을 찾는다
    (JpaRepository 상속 받은 repository interface들은 spring data jpa 가 proxy를 만들어 빈으로 등록)
 3. 그 클래스들의 인스턴스를 만들어 애플리케이션 컨텍스트에 추가한다
